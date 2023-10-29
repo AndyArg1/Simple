@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Binomial Coefficient Calculator</title>
+   <style>
+      body {
+       background-color: #ffffe6;
+      
+        font-family: Arial;
+      }
+
+      h1 {
+        color: #007BFF;
+      }
+
+      p {
+        font-weight: bold
+        color: #333;
+      }
+
+      input[type="text"] {
+        background-color: #FFC0CB;
+        color: black;
+        padding: 5px;
+        font-size: 16px;
+        border: 3px solid tomato;
+        font-weight: bold;
+        width: 80px;
+      }
+
+      button 
+      {
+        background-color: #007BFF;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border: 3px solid green;
+      }
+
+      #result 
+      {
+        color: #333;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+   </style>
+
+   <script>
+      function calculateFaculty(n) 
+      {
+         let faculty = 1;
+         let parsedN = parseInt(n); // Parse the input parameter as an integer.
+         
+         if (!isNaN(parsedN) && parsedN >= 0)
+         {
+           for (let i = 1; i <= parsedN; i++) 
+           {
+             faculty = faculty * i;
+           }
+         
+           return faculty; // Return the faculty value as a number.
+         }
+         else
+         {
+           return NaN; // Return NaN for invalid input.
+         }
+      }
+   </script>
+   
+   <script>
+     function calculateBinomialCoefficient(n, k)
+     {
+       let parsedN = parseInt(n);
+       let parsedK = parseInt(k);
+
+       if (!isNaN(parsedN) && !isNaN(parsedK) && parsedN >= 0 && parsedK >= 0 && parsedK <= parsedN)
+       {
+           let binomialCoefficient = calculateFaculty(n) / (calculateFaculty(k) * calculateFaculty(n - k));
+           return binomialCoefficient; 
+         }
+         else
+         {
+           return NaN; // Return NaN for invalid input.
+         }
+     }
+   </script>
+</head>
+<body>
+<h1>Binomial Coefficient Calculator</h1>
+<p>Enter n: <input type="text" placeholder="5" id="n"></p>
+<p>Enter k: <input type="text" placeholder="2" id="k"></p>
+<button onclick="displayResult()">Calculate Binomial Coefficient</button>
+<p id="result"></p>
+
+<script>
+function displayResult() {
+  var n = document.getElementById("n").value;
+  var k = document.getElementById("k").value;
+  var result = document.getElementById("result");
+  var binomialCoefficient = calculateBinomialCoefficient(n, k);
+
+  if (!isNaN(binomialCoefficient)) {
+    result.innerHTML = "Binomial Coefficient: " + binomialCoefficient;
+    result.style.color = "#28a745"; // Green color for success
+  } else {
+    result.innerHTML = "Enter valid non-negative integers, with k <= n.";
+    result.style.color = "#dc3545"; // Red color for error
+  }
+}
+</script>
+</body>
+</html>
